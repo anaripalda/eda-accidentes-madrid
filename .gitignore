@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+model.pkl
+300228-2-accidentes-trafico-detalle-csv.csv
