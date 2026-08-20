@@ -86,7 +86,7 @@ Power BI Desktop que recoge visualmente los principales hallazgos del análisis.
 Las dos primeras se relacionan por `num_expediente` en una relación uno a varios.
 Esta separación responde a los dos niveles de detalle de los datos: las
 variables de contexto (distrito, franja horaria, tipo de vía) describen el
-accidente, mientras que sexo, edad, tipo de vehículo o positiva_alcohol describen
+accidente, mientras que sexo, edad, tipo de vehículo o `positiva_alcohol` describen
 a cada implicado y pueden tomar valores distintos dentro de un mismo siniestro.
 
 **Medidas.** Once medidas en DAX, entre ellas el porcentaje de accidentes graves
@@ -112,20 +112,28 @@ un accidente distinto.
 
 > El archivo `Informe_Accidentes_Madrid.pbix` requiere Power BI Desktop.
 > Para consultarlo sin la aplicación, está disponible en `Informe_Accidentes_Madrid.pdf`.
+> El informe se alimenta de powerbi_accidentes.csv y powerbi_personas.csv, generados
+> desde el anexo del notebook. Al abrir el .pbix, puede ser necesario actualizar
+> la ruta de origen de ambos archivos en Power Query.
 
 ## Estructura del repositorio
 
 ```
-eda_accidentes_trafico.ipynb   Notebook principal: EDA y modelado
-models.py                      Clase AlcoholLogisticModel (fit/predict/evaluate/save/load)
-testing.py                     Script de prueba de la clase
-Distritos.geojson              Límites de los distritos de Madrid
+eda_accidentes_trafico.ipynb        Notebook principal: EDA, modelado y anexo de exportación
+models.py                           Clase AlcoholLogisticModel (fit/predict/evaluate/save/load)
+testing.py                          Script de prueba de la clase
+Distritos.geojson                   Límites de los distritos de Madrid
+Informe_Accidentes_Madrid.pbix      Informe de Power BI
+Informe_Accidentes_Madrid.pdf       Informe exportado a PDF
+powerbi_accidentes.csv              Tabla de accidentes exportada para el informe
+powerbi_personas.csv                Tabla de personas implicadas exportada para el informe
+capturas/                           Capturas de las cuatro páginas del informe
 ```
 
 ## Dependencias
 
 ```
-pandas · numpy · matplotlib · seaborn · scikit-learn · geopandas
+pandas · numpy · matplotlib · seaborn · scikit-learn · geopandas · Power BI Desktop
 ```
 
 ## Ejecución
