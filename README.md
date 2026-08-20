@@ -72,6 +72,47 @@ detectar a alguien que ha dado positivo— es el escenario costoso.
 - Entre los tipos de siniestro destacan **choques y vuelcos**.
 - El distrito aporta información útil al modelo: eliminarlo empeora las métricas.
 
+## Informe de Power BI
+
+A partir de los datos depurados en el notebook se ha construido un informe en
+Power BI Desktop que recoge visualmente los principales hallazgos del análisis.
+
+**Modelo de datos.** Tres tablas relacionadas en esquema en estrella:
+
+- `Accidentes` — una fila por siniestro (20.622 registros)
+- `Personas` — una fila por persona implicada (48.817 registros)
+- `Calendario` — tabla de fechas generada en DAX
+
+Las dos primeras se relacionan por `num_expediente` en una relación uno a varios.
+Esta separación responde a los dos niveles de detalle de los datos: las
+variables de contexto (distrito, franja horaria, tipo de vía) describen el
+accidente, mientras que sexo, edad, tipo de vehículo o positiva_alcohol describen
+a cada implicado y pueden tomar valores distintos dentro de un mismo siniestro.
+
+**Medidas.** Once medidas en DAX, entre ellas el porcentaje de accidentes graves
+y el recuento de siniestros con al menos un positivo en alcoholemia, calculado con
+`DISTINCTCOUNT` sobre la tabla de personas para evitar contar cada implicado como
+un accidente distinto.
+
+**Estructura del informe.** Cuatro páginas con navegación:
+
+| Página | Contenido |
+|--------|-----------|
+| Resumen | Indicadores generales, evolución mensual, franja horaria y tipo de accidente |
+| ¿Dónde? | Ranking de accidentes y porcentaje de graves por distrito |
+| ¿Cuándo? | Distribución horaria y porcentaje de graves por franja, tipo de vía y día |
+| ¿Quién? | Perfil de los implicados y positivos en alcoholemia por franja horaria |
+
+### Capturas
+
+![Resumen](capturas/pagina1_resumen.png)
+![Análisis geográfico](capturas/pagina2_donde.png)
+![Análisis temporal](capturas/pagina3_cuando.png)
+![Perfil de implicados](capturas/pagina4_quien.png)
+
+> El archivo `Informe_Accidentes_Madrid.pbix` requiere Power BI Desktop.
+> Para consultarlo sin la aplicación, está disponible en `Informe_Accidentes_Madrid.pdf`.
+
 ## Estructura del repositorio
 
 ```
